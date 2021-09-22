@@ -37,6 +37,7 @@ class Circle {
       ball.lineStyle(0); 
       ball.beginFill(colour, 1);
       ball.drawCircle( 0, 0, radius);
+      ball.alpha=0;
       this.radius = radius;
       ball.endFill();
       ball.pivot.x = radius/2;
@@ -46,7 +47,7 @@ class Circle {
       ball.velocityx = Math.random() < 0.5 ? -ballSpeed  : ballSpeed;
       ball.velocityy = Math.random() < 0.5 ? -ballSpeed  : ballSpeed;
       app.stage.addChild(ball);
-      TweenMax.to(ball, 1, {pixi:{fillColor:"0xDE3249"}});
+      TweenMax.to(ball, 1, {pixi:{alpha:1}});
       this.ball= ball;
   }
   update() {
@@ -88,7 +89,7 @@ class Circle {
 //For loop places 25 balls into circle array
 let Circlearray=[];
 for (let i = 0; i < 25; i++) {
-  Circlearray.push(new Circle(radius,x ,y, 0xeeeeee));
+  Circlearray.push(new Circle(radius,x ,y, "0xDE3249"));
 }
 
 

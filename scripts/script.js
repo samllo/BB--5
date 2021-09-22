@@ -34,6 +34,7 @@ var Circle = /** @class */ (function () {
         ball.lineStyle(0);
         ball.beginFill(colour, 1);
         ball.drawCircle(0, 0, radius);
+        ball.alpha = 0;
         this.radius = radius;
         ball.endFill();
         ball.pivot.x = radius / 2;
@@ -43,7 +44,7 @@ var Circle = /** @class */ (function () {
         ball.velocityx = Math.random() < 0.5 ? -ballSpeed : ballSpeed;
         ball.velocityy = Math.random() < 0.5 ? -ballSpeed : ballSpeed;
         app.stage.addChild(ball);
-        TweenMax.to(ball, 1, { pixi: { fillColor: "0xDE3249" } });
+        TweenMax.to(ball, 1, { pixi: { alpha: 1 } });
         this.ball = ball;
     }
     Circle.prototype.update = function () {
@@ -80,7 +81,7 @@ var Circle = /** @class */ (function () {
 //For loop places 25 balls into circle array
 var Circlearray = [];
 for (var i = 0; i < 25; i++) {
-    Circlearray.push(new Circle(radius, x, y, 0xeeeeee));
+    Circlearray.push(new Circle(radius, x, y, "0xDE3249"));
 }
 // ticker triggers update() method of CIRCLES
 var delta = 1;
