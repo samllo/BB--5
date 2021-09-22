@@ -1,6 +1,6 @@
 // variables and gsap setup
 const appHeight = 600;
-const appWidth = 700;
+const appWidth = 600;
 const radius = 30;
 let velocity = 2;
 gsap.registerPlugin();
@@ -28,6 +28,9 @@ let gravity = 0.1;
 let ballSpeed = 10;
 
 //Ball creation class, random number generation dictates xy direction and position
+//TweenMax.to(ball, 2, {pixi:{scaleX:2, scaleY:2}});  ballTL.reverse()
+let ballTL = gsap.timeline({pixi:{scaleX:2, scaleY:2}});
+
 class Circle {
   constructor(radius, x = Math.random() * appWidth , y = Math.random() * appHeight, colour ) {
       const ball = new PIXI.Graphics();
@@ -43,6 +46,7 @@ class Circle {
       ball.velocityx = Math.random() < 0.5 ? -ballSpeed  : ballSpeed;
       ball.velocityy = Math.random() < 0.5 ? -ballSpeed  : ballSpeed;
       app.stage.addChild(ball);
+      TweenMax.to(ball, 1, {pixi:{fillColor:"0xDE3249"}});
       this.ball= ball;
   }
   update() {
@@ -84,7 +88,7 @@ class Circle {
 //For loop places 25 balls into circle array
 let Circlearray=[];
 for (let i = 0; i < 25; i++) {
-  Circlearray.push(new Circle(radius,x ,y, 0xDE3249));
+  Circlearray.push(new Circle(radius,x ,y, 0xeeeeee));
 }
 
 
@@ -93,7 +97,6 @@ for (let i = 0; i < 25; i++) {
 
 let delta = 1;
 
-
 ticker.add((delta) => {
   Circlearray.forEach(c => {
     c.update();
@@ -101,145 +104,19 @@ ticker.add((delta) => {
 }
 
 
-
+// Buttons
 
 /* Buttons images for pressed unpressed*/
 const textureButton = PIXI.Texture.from('images/bluebut.png');
 const textureButtonDown = PIXI.Texture.from('images/redbut.png');
-const buttonArray=[];
 
-// button posiiton in array and for loop creating 3
-
-/*
-const buttonPositions = [
-    100, 500,
-    200, 500,
-    300, 500,
-    400, 500,
-]
-
-for (let i = 0; i < 4; i++) {
-  const button = new PIXI.Sprite(textureButton);
-  button.anchor.set(0.5);
-  button.x = buttonPositions[i * 2];
-  button.y = buttonPositions[i * 2 + 1];
-  // interactive
-  button.interactive = true;
-  button.buttonMode = true;
-  button
-  app.stage.addChild(button);
-  buttons.push(button);
-}
-
-buttons[0].scale.set(0.1);
-buttons[1].scale.set(0.1);
-buttons[2].scale.set(0.1);
-buttons[3].scale.set(0.1);
-
-
-// Struggled to minimise all these function calls
-buttons[0].on('mousedown', button0D)
-buttons[0].on('mouseup', button0U)
-buttons[0].on('mouseover', movebutton1)
-buttons[0].on('mouseout', movebutton1back)
-
-function button0D(){
-  gravity = 1.2;
-  this.texture = textureButtonDown;
-  this.alpha = 1;
-  this.isdown = true;
-}
-
-function button0U(){
-  gravity = 0.1;
-  this.texture = textureButton;
-  this.isdown = false;
-}
-
-buttons[1].on('mousedown', button1D)
-buttons[1].on('mouseup', button1U)
-buttons[1].on('mouseover', movebutton2)
-buttons[1].on('mouseout', movebutton2back)
-
-function button1D(){
-  Circlearray.push(new Circle (radius,x ,y,0x0000FF))
-  this.texture = textureButtonDown;
-  this.alpha = 1;
-  this.isdown = true;
-}
-
-function button1U(){
-  this.texture = textureButton;
-  this.isdown = false;
-}
-
-buttons[2].on('mousedown', button2D)
-buttons[2].on('mouseup', button2U)
-buttons[2].on('mouseover', movebutton3)
-buttons[2].on('mouseout', movebutton3back)
-
-function button2D(){
-  this.texture = textureButtonDown;
-  this.alpha = 1;
-  this.isdown = true;
-  ticker.stop();
-}
-
-function button2U(){
-  this.texture = textureButton;
-  this.isdown = false;
-  ticker.start();
-}
-
-// button 4 remove ball
-buttons[3].on('mousedown', button3D)
-buttons[3].on('mouseup', button3U)
-
-let z = 0;
-
-function button3D(){
-  this.texture = textureButtonDown;
-  this.alpha = 1;
-  this.isdown = true;
-  Circlearray[z].removeball();
-}
-
-function button3U(){
-  this.texture = textureButton;
-  this.isdown = false;
-  z++;
-}
-
-//effects
-// basic scale change on hover, couldn't get fades to work
-function movebutton1() {
-  TweenMax.to(buttons[0].scale.set(0.12));
-}
-function movebutton1back() {
-  TweenMax.to(buttons[0].scale.set(0.1));
-}
-
-function movebutton2() {
-  TweenMax.to(buttons[1].scale.set(0.12));
-}
-function movebutton2back() {
-  TweenMax.to(buttons[1].scale.set(0.1));
-}
-
-function movebutton3() {
-  TweenMax.to(buttons[2].scale.set(0.12));
-}
-function movebutton3back() {
-  TweenMax.to(buttons[2].scale.set(0.1));
-}
-*/
 
 /// button class 
 class BUTTONS {
-  constructor(x,y,butDOWN,butUP?) {
+  constructor(moveX,y,butDOWN,butUP?) {
       const but = new PIXI.Sprite(textureButton);
       but.anchor.set(0.5);
-      but.x = x;
+      but.x = -200;
       but.y = y;
       // interactive
       but.interactive = true;
@@ -254,12 +131,13 @@ class BUTTONS {
       if(butUP){but.on('mouseup', butUP)}; // can bypass if optional parameter not included
       but.on('mouseover', movebutton);
       but.on('mouseout', movebuttonback);
-      
+      TweenMax.to(but, 1.5, {pixi:{ x:moveX}});
   }
 }
 
 
 /* Removed for loop in favour of using BUTTONS constructor to build individual button functions into each instance */
+const buttonArray=[];
 buttonArray.push(new BUTTONS(100,500,but0D,but0U);
 buttonArray.push(new BUTTONS(200,500,but1D,);
 buttonArray.push(new BUTTONS(300,500,but2D,);
@@ -275,7 +153,8 @@ function but0U(){
 }
 // button 2 - ADD BALL
 function but1D(){
-  Circlearray.push(new Circle (radius,x ,y,0x0000FF))
+  let randColour = '0x'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');) // Random colour generator for new balls
+  Circlearray.push(new Circle (radius,x ,y,randColour))
 }
 // no up function but-2
 
@@ -323,13 +202,14 @@ function movebuttonback() {
 
 
 
+
 //new- Cleaned up text with Text Class 
 class TEXT {
   constructor(x,text,) {
       const text = new PIXI.Text(text);;
       text.anchor.set(0.5);
       text.x = x;
-      text.y = 550;
+      text.y = 800;
       // interactive
       text.style = new PIXI.TextStyle({
         fill: 0x000000,
@@ -337,6 +217,7 @@ class TEXT {
         fontFamily: "Orbitron"
       })
       app.stage.addChild(text);
+      TweenMax.to(text, 1.5, {pixi:{ y:550}});
   }
 }
 
@@ -347,3 +228,19 @@ new TEXT(300,"Start")
 new TEXT(400,"Stop")
 new TEXT(500,"Remove")
 
+
+const test = new PIXI.Graphics();
+      test.lineStyle(0); 
+      test.beginFill(, 1);
+      test.drawCircle( 0, 0, 40);
+      test.endFill();
+      test.x =  200;
+      test.y =  200;
+      app.stage.addChild(test);
+
+
+
+
+
+
+TweenMax.to(test, 2, {pixi:{ x:100}});
