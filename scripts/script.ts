@@ -106,11 +106,7 @@ ticker.add((delta) => {
 /* Buttons images for pressed unpressed*/
 const textureButton = PIXI.Texture.from('images/bluebut.png');
 const textureButtonDown = PIXI.Texture.from('images/redbut.png');
-const buttons = [];
-
 const buttonArray=[];
-
-let butX = 100;
 
 // button posiiton in array and for loop creating 3
 
@@ -240,7 +236,7 @@ function movebutton3back() {
 
 /// button class 
 class BUTTONS {
-  constructor(x,y,butDOWN,butUP) {
+  constructor(x,y,butDOWN,butUP?) {
       const but = new PIXI.Sprite(textureButton);
       but.anchor.set(0.5);
       but.x = x;
@@ -255,7 +251,7 @@ class BUTTONS {
       but.on('mousedown', buttonsDOWN);
       but.on('mousedown', butDOWN);
       but.on('mouseup', buttonsUP);
-      but.on('mouseup', butUP);
+      if(butUP){but.on('mouseup', butUP)}; // can bypass if optional parameter not included
       but.on('mouseover', movebutton);
       but.on('mouseout', movebuttonback);
       
@@ -263,20 +259,50 @@ class BUTTONS {
 }
 
 
-for (let i = 0; i < 4; i++) {
-  buttonArray.push(new BUTTONS(butX,500,butDOWN,butUP));
-  butX+=100;
-}
-buttonArray.push(new BUTTONS(100,500,butDOWN,butUP)
-buttonArray.push(new BUTTONS(200,500,butDOWN,butUP)
-buttonArray.push(new BUTTONS(300,500,butDOWN,butUP)
-buttonArray.push(new BUTTONS(400,500,butDOWN,butUP)
+/* Removed for loop in favour of using BUTTONS constructor to build individual button functions into each instance */
+buttonArray.push(new BUTTONS(100,500,but0D,but0U);
+buttonArray.push(new BUTTONS(200,500,but1D,);
+buttonArray.push(new BUTTONS(300,500,but2D,);
+buttonArray.push(new BUTTONS(400,500,but3D,);
+buttonArray.push(new BUTTONS(500,500,but4D,but4U);
 
+// button 1 - GRAVITY
 function but0D(){
   gravity = 1.2;
 }
+function but0U(){
+  gravity = 0.1;
+}
+// button 2 - ADD BALL
+function but1D(){
+  Circlearray.push(new Circle (radius,x ,y,0x0000FF))
+}
+// no up function but-2
+
+// button 3 - START
+function but2D(){
+  ticker.start();
+}
+// no up function but-3
+
+// Button 4 - STOP
+function but3D(){
+  ticker.stop();
+}
+// no up funciton but-4
+
+// Button 5 - ADD BALL
+let z = 0;
+function but4D(){
+  Circlearray[z].removeball();
+}
+
+function but4U(){
+  z++;
+}
 
 
+// universal button functions
 function buttonsDOWN(){
   this.texture = textureButtonDown;
   this.alpha = 1;
@@ -287,14 +313,13 @@ function buttonsUP(){
   this.texture = textureButton;
   this.isdown = false;
 }
+
 function movebutton() {
-  TweenMax.to(this.scale.set(0.12));
+  this.scale.set(0.12);
 }
 function movebuttonback() {
-  TweenMax.to(this.scale.set(0.1));
+  this.scale.set(0.1);
 }
-
-buttonArray[0].button.on('mousedown', but0D);
 
 
 
@@ -323,7 +348,7 @@ text2.style = new PIXI.TextStyle({
 
 app.stage.addChild(text2)
 
-text3 = new PIXI.Text("Stop!");
+text3 = new PIXI.Text("Start");
 text3.x = 300;
 text3.y = 550;
 text3.anchor.set(0.5);
@@ -335,7 +360,7 @@ text3.style = new PIXI.TextStyle({
 
 app.stage.addChild(text3)
 
-text4 = new PIXI.Text("Remove");
+text4 = new PIXI.Text("Stop");
 text4.x = 400;
 text4.y = 550;
 text4.anchor.set(0.5);
