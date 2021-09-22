@@ -323,56 +323,27 @@ function movebuttonback() {
 
 
 
-// Text
-
-text = new PIXI.Text("Gravity");
-text.x = 100;
-text.y = 550;
-text.anchor.set(0.5);
-text.style = new PIXI.TextStyle({
-  fill: 0x000000,
-  fontSize: 20,
-  fontFamily: "Orbitron"
-})
-app.stage.addChild(text)
-
-text2 = new PIXI.Text("Add Ball");
-text2.x = 200;
-text2.y = 550;
-text2.anchor.set(0.5);
-text2.style = new PIXI.TextStyle({
-  fill: 0x000000,
-  fontSize: 20,
-  fontFamily: "Orbitron"
-})
-
-app.stage.addChild(text2)
-
-text3 = new PIXI.Text("Start");
-text3.x = 300;
-text3.y = 550;
-text3.anchor.set(0.5);
-text3.style = new PIXI.TextStyle({
-  fill: 0x000000,
-  fontSize: 20,
-  fontFamily: 'Orbitron';
-})
-
-app.stage.addChild(text3)
-
-text4 = new PIXI.Text("Stop");
-text4.x = 400;
-text4.y = 550;
-text4.anchor.set(0.5);
-text4.style = new PIXI.TextStyle({
-  fill: 0x000000,
-  fontSize: 20,
-  fontFamily: 'Orbitron';
-})
-
-app.stage.addChild(text4)
+//new- Cleaned up text with Text Class 
+class TEXT {
+  constructor(x,text,) {
+      const text = new PIXI.Text(text);;
+      text.anchor.set(0.5);
+      text.x = x;
+      text.y = 550;
+      // interactive
+      text.style = new PIXI.TextStyle({
+        fill: 0x000000,
+        fontSize: 20,
+        fontFamily: "Orbitron"
+      })
+      app.stage.addChild(text);
+  }
+}
 
 
-
-
+new TEXT(100,"Gravity")
+new TEXT(200,"Add")
+new TEXT(300,"Start")
+new TEXT(400,"Stop")
+new TEXT(500,"Remove")
 
