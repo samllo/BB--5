@@ -28,9 +28,6 @@ let gravity = 0.1;
 let ballSpeed = 10;
 
 //Ball creation class, random number generation dictates xy direction and position
-//TweenMax.to(ball, 2, {pixi:{scaleX:2, scaleY:2}});  ballTL.reverse()
-let ballTL = gsap.timeline({pixi:{scaleX:2, scaleY:2}});
-
 class Circle {
   constructor(radius, x = Math.random() * appWidth , y = Math.random() * appHeight, colour ) {
       const ball = new PIXI.Graphics();
@@ -81,34 +78,11 @@ class Circle {
     app.stage.removeChild(this.ball);
 }
 
-//Extends ball creation class with a method thatn can be updated using update loop set of by ticker
-
-// x/y direction is reveresed when balls anchor reaches limits of appheight and width
-
-
 //For loop places 25 balls into circle array
 let Circlearray=[];
 for (let i = 0; i < 25; i++) {
   Circlearray.push(new Circle(radius,x ,y, "0xDE3249"));
 }
-
-// Counter
-class COUNTER {
-  constructor(count) {
-      const Count = new PIXI.Text(count);;
-      Count.anchor.set(0.5);
-      Count.x = 300;
-      Count.y = 300;
-      // interactive
-      Count.style = new PIXI.TextStyle({
-        fill: 0x000000,
-        fontSize: 30,
-        fontFamily: "Orbitron"
-      })
-      app.stage.addChild(Count);
-    }
-  }
-
 
 // Counter - updates using +=1 or -=1 on add/remove ball buttons
 let counter = 25;
@@ -123,8 +97,6 @@ fontSize: 30,
 fontFamily: "Orbitron"
 });
 app.stage.addChild(Count);
-
-
 
 // ticker triggers update() method of CIRCLES
 let delta = 1;
@@ -141,7 +113,6 @@ ticker.add((delta) => {
 /* Buttons images for pressed unpressed*/
 const textureButton = PIXI.Texture.from('images/bluebut.png');
 const textureButtonDown = PIXI.Texture.from('images/redbut.png');
-
 
 /// button class 
 class BUTTONS {
@@ -216,7 +187,6 @@ function but4U(){
   z++;
 }
 
-
 // universal button functions
 function buttonsDOWN(){
   this.texture = textureButtonDown;
@@ -237,8 +207,6 @@ function movebuttonback() {
 }
 
 
-
-
 //new- Cleaned up text with Text Class 
 class TEXT {
   constructor(x,text) {
@@ -256,7 +224,6 @@ class TEXT {
       TweenMax.to(text, 1.5, {pixi:{ y:550}});
   }
 }
-
 
 new TEXT(100,"Gravity")
 new TEXT(200,"Add")

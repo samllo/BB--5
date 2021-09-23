@@ -24,8 +24,6 @@ var y;
 var gravity = 0.1;
 var ballSpeed = 10;
 //Ball creation class, random number generation dictates xy direction and position
-//TweenMax.to(ball, 2, {pixi:{scaleX:2, scaleY:2}});  ballTL.reverse()
-var ballTL = gsap.timeline({ pixi: { scaleX: 2, scaleY: 2 } });
 var Circle = /** @class */ (function () {
     function Circle(radius, x, y, colour) {
         if (x === void 0) { x = Math.random() * appWidth; }
@@ -76,31 +74,11 @@ var Circle = /** @class */ (function () {
     };
     return Circle;
 }());
-//Extends ball creation class with a method thatn can be updated using update loop set of by ticker
-// x/y direction is reveresed when balls anchor reaches limits of appheight and width
 //For loop places 25 balls into circle array
 var Circlearray = [];
 for (var i = 0; i < 25; i++) {
     Circlearray.push(new Circle(radius, x, y, "0xDE3249"));
 }
-// Counter
-var COUNTER = /** @class */ (function () {
-    function COUNTER(count) {
-        var Count = new PIXI.Text(count);
-        ;
-        Count.anchor.set(0.5);
-        Count.x = 300;
-        Count.y = 300;
-        // interactive
-        Count.style = new PIXI.TextStyle({
-            fill: 0x000000,
-            fontSize: 30,
-            fontFamily: "Orbitron"
-        });
-        app.stage.addChild(Count);
-    }
-    return COUNTER;
-}());
 // Counter - updates using +=1 or -=1 on add/remove ball buttons
 var counter = 25;
 var Count = new PIXI.Text(counter);
