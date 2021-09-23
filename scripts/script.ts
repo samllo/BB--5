@@ -141,11 +141,11 @@ class BUTTONS {
 
 /* Removed for loop in favour of using BUTTONS constructor to build individual button functions into each instance */
 const buttonArray=[];
-buttonArray.push(new BUTTONS(100,500,but0D,but0U);
-buttonArray.push(new BUTTONS(200,500,but1D,);
-buttonArray.push(new BUTTONS(300,500,but2D,);
-buttonArray.push(new BUTTONS(400,500,but3D,);
-buttonArray.push(new BUTTONS(500,500,but4D,but4U);
+buttonArray.push(new BUTTONS(100,500,but0D,but0U));
+buttonArray.push(new BUTTONS(200,500,but1D,));
+buttonArray.push(new BUTTONS(300,500,but2D,));
+buttonArray.push(new BUTTONS(400,500,but3D,));
+buttonArray.push(new BUTTONS(500,500,but4D,but4U));
 
 // button 1 - GRAVITY
 function but0D(){
@@ -240,5 +240,5 @@ function Flashfunc(){
       flash.y =  500;
       flash.x =  100;
 app.stage.addChild(flash);
-TweenMax.to(flash, 1, {pixi:{scale:200; alpha:0;}}
+TweenMax.to(flash, 1, {pixi:{scale:200, alpha:0}});
 }
