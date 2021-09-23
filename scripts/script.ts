@@ -47,7 +47,7 @@ class Circle {
       ball.velocityx = Math.random() < 0.5 ? -ballSpeed  : ballSpeed;
       ball.velocityy = Math.random() < 0.5 ? -ballSpeed  : ballSpeed;
       app.stage.addChild(ball);
-      TweenMax.to(ball, 1, {pixi:{alpha:1}});
+      TweenMax.to(ball, 2, {pixi:{alpha:1}});
       this.ball= ball;
   }
   update() {
@@ -92,16 +92,47 @@ for (let i = 0; i < 25; i++) {
   Circlearray.push(new Circle(radius,x ,y, "0xDE3249"));
 }
 
+// Counter
+class COUNTER {
+  constructor(count) {
+      const Count = new PIXI.Text(count);;
+      Count.anchor.set(0.5);
+      Count.x = 300;
+      Count.y = 300;
+      // interactive
+      Count.style = new PIXI.TextStyle({
+        fill: 0x000000,
+        fontSize: 30,
+        fontFamily: "Orbitron"
+      })
+      app.stage.addChild(Count);
+    }
+  }
+
+
+// Counter - updates using +=1 or -=1 on add/remove ball buttons
+let counter = 25;
+const Count = new PIXI.Text(counter);;
+Count.anchor.set(0.5);
+Count.x = 500;
+Count.y = 100;
+// interactive
+Count.style = new PIXI.TextStyle({
+fill: 0x000000,
+fontSize: 30,
+fontFamily: "Orbitron"
+});
+app.stage.addChild(Count);
+
 
 
 // ticker triggers update() method of CIRCLES
-
 let delta = 1;
-
 ticker.add((delta) => {
   Circlearray.forEach(c => {
     c.update();
   });
+  Count.text = counter;
 }
 
 
@@ -154,8 +185,9 @@ function but0U(){
 }
 // button 2 - ADD BALL
 function but1D(){
-  let randColour = '0x'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');) // Random colour generator for new balls
-  Circlearray.push(new Circle (radius,x ,y,randColour))
+  let randColour = '0x'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');); // Random colour generator for new balls
+  Circlearray.push(new Circle (radius,x ,y,randColour));
+  counter +=1;
 }
 // no up function but-2
 
@@ -171,10 +203,11 @@ function but3D(){
 }
 // no up funciton but-4
 
-// Button 5 - ADD BALL
+// Button 5 - Remove BALL
 let z = 0;
 function but4D(){
   Circlearray[z].removeball();
+  counter -=1;
 }
 
 function but4U(){
@@ -206,7 +239,7 @@ function movebuttonback() {
 
 //new- Cleaned up text with Text Class 
 class TEXT {
-  constructor(x,text,) {
+  constructor(x,text) {
       const text = new PIXI.Text(text);;
       text.anchor.set(0.5);
       text.x = x;
@@ -229,19 +262,3 @@ new TEXT(300,"Start")
 new TEXT(400,"Stop")
 new TEXT(500,"Remove")
 
-
-const test = new PIXI.Graphics();
-      test.lineStyle(0); 
-      test.beginFill(, 1);
-      test.drawCircle( 0, 0, 40);
-      test.endFill();
-      test.x =  200;
-      test.y =  200;
-      app.stage.addChild(test);
-
-
-
-
-
-
-TweenMax.to(test, 2, {pixi:{ x:100}});
