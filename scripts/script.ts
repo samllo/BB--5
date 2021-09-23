@@ -179,9 +179,11 @@ buttonArray.push(new BUTTONS(500,500,but4D,but4U);
 // button 1 - GRAVITY
 function but0D(){
   gravity = 1.2;
+  Flashfunc();
 }
 function but0U(){
   gravity = 0.1;
+  app.stage.removeChild(flash);
 }
 // button 2 - ADD BALL
 function but1D(){
@@ -262,3 +264,14 @@ new TEXT(300,"Start")
 new TEXT(400,"Stop")
 new TEXT(500,"Remove")
 
+// flash effect 
+function Flashfunc(){ 
+  const flash  = new PIXI.Graphics();
+      flash.beginFill(0xffffff);
+      flash.drawCircle(0, 0, 3);
+      flash.endFill();
+      flash.y =  500;
+      flash.x =  100;
+app.stage.addChild(flash);
+TweenMax.to(flash, 1, {pixi:{scale:200; alpha:0;}}
+}
