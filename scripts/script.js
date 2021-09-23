@@ -150,8 +150,7 @@ function but0U() {
 }
 // button 2 - ADD BALL
 function but1D() {
-    var randColour = '0x' + (Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
-    ; // Random colour generator for new balls
+    var randColour = '0x' + (Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0'); // Random colour generator for new balls
     Circlearray.push(new Circle(radius, x, y, randColour));
     counter += 1;
 }
